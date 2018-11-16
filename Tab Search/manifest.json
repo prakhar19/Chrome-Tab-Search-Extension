@@ -1,0 +1,29 @@
+{
+    "name" : "Tab Search",
+
+    "version" : "1.0",
+
+    "author" : "Prakhar Agarwal",
+
+    "description" : "Allows easy searching of Tabs.",
+
+    "manifest_version" : 2,
+
+    "background" : {
+        "scripts" : ["background.js"],
+        "persistent" : false
+    },
+    
+    "page_action" : {
+        "default_popup" : "popup.html"
+    },
+
+    "commands" : {
+        "excute_tab_search" : {
+            "description" : "Show the Tab Search Box",
+            "suggested_key" : {
+                "default" : "Tab+S"
+            }
+        }
+    }
+}
