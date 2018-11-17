@@ -1,0 +1,11 @@
+body {
+    text-align: center;
+}
+
+#tab-search-input {
+    width: 80%;
+    border: solid 1px #ccc;
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-size: 20px;
+}
