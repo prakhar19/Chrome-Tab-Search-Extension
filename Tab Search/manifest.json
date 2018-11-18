@@ -1,32 +1,32 @@
 {
-    "name" : "Tab Search",
+    "name": "Tab Search",
 
-    "version" : "1.0",
+    "version": "1.0",
 
-    "author" : "Prakhar Agarwal",
+    "author": "Prakhar Agarwal",
 
-    "description" : "Allows easy searching of Tabs.",
+    "description": "Allows easy searching of Tabs.",
 
-    "manifest_version" : 2,
+    "manifest_version": 2,
 
-    "permissions" : [ "tabs", "activeTab" ],
+    "permissions": [ "tabs", "activeTab" ],
 
-    "web_accessible_resources" : [ "widget.html" ],
+    "web_accessible_resources": [ "widget.html" ],
 
-    "background" : {
-        "scripts" : [ "background.js" ],
-        "persistent" : false
+    "background": {
+        "scripts": [ "background.js" ],
+        "persistent": false
     },
     
-    "browser_action" : {
-        "default_popup" : "popup.html"
+    "browser_action": {
+        "default_popup": "popup.html"
     },
 
-    "commands" : {
-        "execute_tab_search" : {
-            "description" : "Show the Tab Search Box",
-            "suggested_key" : {
-                "default" : "Ctrl+Shift+F"
+    "commands": {
+        "execute_tab_search": {
+            "description": "Show the Tab Search Box",
+            "suggested_key": {
+                "default": "Ctrl+Shift+F"
             }
         }
     }

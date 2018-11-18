@@ -13,19 +13,8 @@ if (typeof iframe !== 'undefined') {
 
 }
 
-if(!focus_input) function focus_input() {
-    console.log(iframe.contentWindow.readyState);
-    if (iframe.readyState == 'complete') {
-        console.log('a');
-        iframe.content.postMessage('focus-input', '*');
-        return;
-    }
-
-    window.setTimeout(focus_input, 10);
-}
-
 if (iframe.style.display == 'block') {
-    focus_input();
+    iframe.contentWindow.postMessage('focus-input', '*');
 }
 
 var click = function(event) {
