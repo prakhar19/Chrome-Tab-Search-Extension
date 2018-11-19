@@ -11,52 +11,71 @@ chrome.commands.onCommand.addListener( function(command) {
 
 chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
     var searchTerm = request.searchTerm;
+    var switchTab = request.switchTab;
 
-    tabsList = chrome.tabs.query({}, function(tabs) {
-        console.log(tabs);
+    if(searchTerm !== undefined) {
         var matches = [[], [], [], [], [], []], output = [];
 
-        for (var i = 0; i < tabs.length; i++) {
-            var pos = tabs[i].title.search(searchTerm);
-            if (pos == 0) {
-                matches[0].push(tabs[i]);
-                continue;
-            } else if (pos > 0) {
-                matches[1].push(tabs[i]);
-                continue;
-            }
-            
-            var pos = new URL(tabs[i].url).hostname.search(searchTerm);
-            if (pos == 0) {
-                matches[2].push(tabs[i]);
-                continue;
-            } else if (pos > 0) {
-                matches[3].push(tabs[i]);
-                continue;
-            }
-
-            var pos = tabs[i].url.search(searchTerm);
-            if (pos == 0) {
-                matches[4].push(tabs[i]);
-                continue;
-            } else if (pos > 0) {
-                matches[5].push(tabs[i]);
-                continue;
-            }
+        if(searchTerm === '') {
+            sendResponse({tabs: output});
+            return;
         }
-
-        for (var i = 0; i < matches.length; i++) {
-            for (var j = 0; j < matches[i].length; j++) {
-                output.push([matches[i][j].title, matches[i][j].url]);
+    
+        tabsList = chrome.tabs.query({}, function(tabs) {
+            console.log(tabs);
+    
+            for (var i = 0; i < tabs.length; i++) {
+                var pos = tabs[i].title.toLowerCase().search(searchTerm.toLowerCase());
+                if (pos == 0) {
+                    matches[0].push(tabs[i]);
+                    continue;
+                } else if (pos > 0) {
+                    matches[1].push(tabs[i]);
+                    continue;
+                }
+                
+                var pos = new URL(tabs[i].url).hostname.toLowerCase().search(searchTerm.toLowerCase());
+                if (pos == 0) {
+                    matches[2].push(tabs[i]);
+                    continue;
+                } else if (pos > 0) {
+                    matches[3].push(tabs[i]);
+                    continue;
+                }
+    
+                var pos = tabs[i].url.toLowerCase().search(searchTerm.toLowerCase());
+                if (pos == 0) {
+                    matches[4].push(tabs[i]);
+                    continue;
+                } else if (pos > 0) {
+                    matches[5].push(tabs[i]);
+                    continue;
+                }
             }
-        }
-
-        //console.log(output);
-
-        sendResponse({tabs: "as"});
-
+    
+            for (var i = 0; i < matches.length; i++) {
+                for (var j = 0; j < matches[i].length; j++) {
+                    output.push([matches[i][j].id, matches[i][j].title, matches[i][j].url]);
+                    if(output.length >= 20) break;
+                }
+                if(output.length >= 20) break;
+            }
+    
+            sendResponse({tabs: output});
+        });
+    
         return true;
-    });
+    }
+
+    if(switchTab !== undefined) {
+        chrome.tabs.get(switchTab, function(tab) {
+            chrome.windows.update(tab.windowId, {focused: true});
+            chrome.tabs.update(Number(switchTab), {active: true});
+        });
+    }
+
+
+    
 
 });
 

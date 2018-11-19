@@ -1,11 +1,43 @@
 body {
-    text-align: center;
+    overflow: hidden;
 }
 
 #tab-search-input {
-    width: 80%;
-    border: solid 1px #ccc;
+    width: 100%;
+    margin: 0;
     padding: 12px 20px;
+    background: #ffffff;
+    border: solid 1px #cccccc;
     border-radius: 30px;
     font-size: 20px;
+    outline: none;
+}
+
+
+#tab-search-results {
+    max-height: 240px;
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+    box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
+    list-style: none;
+    overflow: hidden auto;
+}
+
+#tab-search-results>li {
+    margin: 7px 15px;
+    text-align: left;
+    cursor: pointer;
+}
+
+#tab-search-results>li:focus {
+    background: #cccccc;
+}
+
+.tab-search-result-title {
+}
+
+.tab-search-result-url {
+    max-width: 48%;
+    float: right;
 }
