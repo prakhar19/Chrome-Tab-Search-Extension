@@ -36,6 +36,10 @@ body {
     background: #eeeeee;
 }
 
+.tab-search-result-index {
+    padding-right: 3px;
+}
+
 .tab-search-result-title {
 }
 

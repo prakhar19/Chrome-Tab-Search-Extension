@@ -22,7 +22,7 @@ window.onload = function() {
                 var li = document.createElement('li');
                 li.id = response.tabs[i][0];
                 li.tabIndex = -1;
-                li.innerHTML = '<span class="tab-search-result-title">' + response.tabs[i][1] + '</span><span class="tab-search-result-url">' + response.tabs[i][2] + '</span>';
+                li.innerHTML = '<span class="tab-search-result-index">' + (i+1) + '.</span><span class="tab-search-result-title">' + response.tabs[i][1] + '</span><span class="tab-search-result-url">' + response.tabs[i][2] + '</span>';
                 
                 li.onclick = function() {switchTabs(this.id);};
 
