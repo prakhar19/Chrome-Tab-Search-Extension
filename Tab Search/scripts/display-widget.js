@@ -1,15 +1,19 @@
 var iframe;
 
-function lostFocus1(event) {console.log('ass');
-    if(event.data == 'tab-search-focus-remove') {
-        removeIframe();
+if(typeof(lostFocus1) === 'undefined') {
+    function lostFocus1(event) {
+        if(event.data == 'tab-search-focus-remove') {
+            removeIframe();
+        }
     }
 }
 
-function lostFocus2(event) {console.log('as');
-    if(!iframe.contains(event.target)) {
-        removeIframe();
-    };
+if(typeof(lostFocus2) === 'undefined') {
+    function lostFocus2(event) {
+        if(!iframe.contains(event.target)) {
+            removeIframe();
+        };
+    }
 }
 
 
@@ -17,7 +21,7 @@ function removeIframe() {
     iframe.parentNode.removeChild(iframe);
     iframe = null;
     window.removeEventListener('message', lostFocus1);
-    document.removeEventListener('click', lostFocus2);
+    document.removeEventListener('mousedown', lostFocus2);
 }
 
 
@@ -36,5 +40,5 @@ if(iframe instanceof HTMLIFrameElement) {
 
     
     window.addEventListener('message', lostFocus1);
-    document.addEventListener('click', lostFocus2);
+    document.addEventListener('mousedown', lostFocus2);
 }
