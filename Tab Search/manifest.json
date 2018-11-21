@@ -26,7 +26,7 @@
         "execute_tab_search": {
             "description": "Show the Tab Search Box",
             "suggested_key": {
-                "default": "Ctrl+Shift+F"
+                "default": "Ctrl+Space"
             }
         }
     }
