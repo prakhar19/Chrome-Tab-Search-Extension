@@ -31,7 +31,7 @@ window.onload = function() {
         });
     });
 
-    window.addEventListener('mousedown', function (event) {
+    document.addEventListener('mousedown', function (event) {
         if (!tab_search_input.contains(event.target) && !tab_search_results.contains(event.target)) {
             parent.postMessage('tab-search-focus-remove', '*');
         }
@@ -42,7 +42,7 @@ window.onload = function() {
     document.onkeydown = keyboardEvents;
 
     function keyboardEvents(e) {
-        var key = (window.event) ? event.keyCode : e.keyCode;
+        var key = event.which || event.keyCode;
 
         switch (key) {
             case 40:

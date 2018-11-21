@@ -56,9 +56,9 @@ chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
             for (var i = 0; i < matches.length; i++) {
                 for (var j = 0; j < matches[i].length; j++) {
                     output.push([matches[i][j].id, matches[i][j].title, matches[i][j].url]);
-                    if(output.length >= 20) break;
+                    //if(output.length >= 20) break;
                 }
-                if(output.length >= 20) break;
+                //if(output.length >= 20) break;
             }
     
             sendResponse({tabs: output});

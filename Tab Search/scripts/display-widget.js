@@ -17,7 +17,7 @@ function removeIframe() {
     iframe.parentNode.removeChild(iframe);
     iframe = null;
     window.removeEventListener('message', lostFocus1);
-    window.removeEventListener('mousedown', lostFocus2);
+    document.removeEventListener('mouseclick', lostFocus2);
 }
 
 
@@ -36,5 +36,5 @@ if(iframe instanceof HTMLIFrameElement) {
 
     
     window.addEventListener('message', lostFocus1);
-    window.addEventListener('mousedown', lostFocus2);
+    document.addEventListener('mouseclick', lostFocus2);
 }
