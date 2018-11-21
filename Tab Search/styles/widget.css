@@ -25,13 +25,15 @@ body {
 }
 
 #tab-search-results>li {
-    margin: 7px 15px;
+    margin: 0 15px;
+    padding: 5px;
     text-align: left;
     cursor: pointer;
+    outline: none;
 }
 
 #tab-search-results>li:focus {
-    background: #cccccc;
+    background: #eeeeee;
 }
 
 .tab-search-result-title {

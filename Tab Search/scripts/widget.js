@@ -1,12 +1,5 @@
 var active_li = null, tab_search_input, tab_search_results;
 
-
-window.addEventListener('message', function(event) {
-    if(event.data == 'tab-search-focus-input') {
-        document.getElementById('tab-search-input').focus();
-    }
-});
-
 function switchTabs(tabId) {
     chrome.runtime.sendMessage({switchTab: Number(tabId)});
 }
