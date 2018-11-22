@@ -55,7 +55,7 @@ if(iframe instanceof HTMLIFrameElement) {
     iframe = document.createElement('iframe');
     iframe.src = chrome.extension.getURL('widget.html');
 
-    iframe.style = 'display:block;width:70%;height:300px;position:fixed;top:20%;left:50%;transform:translateX(-50%);border:none;z-index:9999999;';
+    iframe.style = 'display:block;width:75%;height:300px;position:fixed;top:20%;left:50%;transform:translateX(-50%);border:none;z-index:9999999;';
 
     document.body.appendChild(iframe);
 
