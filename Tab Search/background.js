@@ -1,3 +1,11 @@
+/*
+
+Author: Prakhar Agarwal
+Github: https://github.com/prakhar19/
+
+*/
+
+
 chrome.commands.onCommand.addListener( function(command) {
     if (command == 'execute_tab_search') {
         
@@ -22,7 +30,6 @@ chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
         }
     
         tabsList = chrome.tabs.query({}, function(tabs) {
-            console.log(tabs);
     
             for (var i = 0; i < tabs.length; i++) {
                 var pos = tabs[i].title.toLowerCase().search(searchTerm.toLowerCase());
@@ -51,11 +58,11 @@ chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
                     matches[5].push(tabs[i]);
                     continue;
                 }
-            }
+            }console.log(matches);
     
             for (var i = 0; i < matches.length; i++) {
                 for (var j = 0; j < matches[i].length; j++) {
-                    output.push([matches[i][j].id, matches[i][j].title, matches[i][j].url]);
+                    output.push([matches[i][j].id, matches[i][j].title, matches[i][j].url, matches[i][j].favIconUrl]);
                     //if(output.length >= 20) break;
                 }
                 //if(output.length >= 20) break;

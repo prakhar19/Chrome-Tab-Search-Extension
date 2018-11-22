@@ -3,7 +3,7 @@ var iframe;
 if(typeof resizeIframe === 'undefined') {
     function resizeIframe(message) {
         if(typeof message.data.resize !== 'undefined') {
-            iframe.style.height = message.data.resize + 'px';
+            iframe.style.height = (message.data.resize + 5) + 'px';
         }
     }
 }

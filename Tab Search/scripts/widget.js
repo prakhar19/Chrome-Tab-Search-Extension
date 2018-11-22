@@ -18,7 +18,7 @@ window.onload = function() {
                 var li = document.createElement('li');
                 li.id = response.tabs[i][0];
                 li.tabIndex = -1;
-                li.innerHTML = '<span class="tab-search-result-index">' + (i+1) + '.</span><span class="tab-search-result-title">' + response.tabs[i][1] + '</span><span class="tab-search-result-url">' + response.tabs[i][2] + '</span>';
+                li.innerHTML = '<span class="tab-search-result-index">' + (i+1) + '.</span><img class="tab-search-result-favicon" src="chrome://favicon/' + response.tabs[i][3] + '"><span class="tab-search-result-title">' + response.tabs[i][1] + '</span><span class="tab-search-result-url">' + response.tabs[i][2] + '</span>';
                 
                 li.onclick = function() {switchTabs(this.id);};
 
@@ -44,8 +44,8 @@ function keyboardEvents(e) {
     switch (key) {
         case 40:
             e.preventDefault();
-            if(!(active_li instanceof Element)) {
-                active_li = document.getElementById('tab-search-results').childNodes[0];
+            if(!(active_li instanceof HTMLLIElement)) {
+                active_li = document.getElementById('tab-search-results').childNodes[1];
             } else if(!(active_li.nextSibling instanceof Element)) {
                 return;
             } else {
@@ -54,16 +54,18 @@ function keyboardEvents(e) {
             break;
         case 38:
             e.preventDefault();
-            if(!(active_li instanceof Element)) {
+            if(!(active_li instanceof HTMLLIElement) || !(tab_search_results.contains(active_li))) {
                 return;
-            } else if(tab_search_results.contains(active_li) && !(active_li.previousSibling instanceof Element)) {
-                tab_search_input.focus();
+            } else if(tab_search_results.contains(active_li) && !(active_li.previousSibling instanceof HTMLLIElement)) {
+                active_li = document.getElementById('tab-search-results').childNodes[1] || null;
             }
             active_li = active_li.previousSibling;
             break;
         case 13:
             activeElement = document.activeElement;
-            if(tab_search_results.contains(activeElement)) {
+            if(tab_search_input == activeElement) {
+                tab_search_results.firstChild.click();
+            } else if(tab_search_results.contains(activeElement)) {
                 activeElement.click();
             }
             parent.postMessage('remove-tab-search', '*');
@@ -74,11 +76,11 @@ function keyboardEvents(e) {
             } else {
                 tab_search_input.focus();
                 tab_search_input.value = '';
+                tab_search_input.dispatchEvent(new Event('input'));
             }
             break;
         default:
-            tab_search_input.focus();
-            return;
+            active_li = tab_search_input;
     }
     
     if(active_li instanceof Element) {
