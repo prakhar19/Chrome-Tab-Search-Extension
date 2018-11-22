@@ -18,7 +18,7 @@ if(typeof lostFocusClick === 'undefined') {
 }
 
 if(typeof lostFocusBlur === 'undefined') {
-    function lostFocusBlur() {console.log('s');
+    function lostFocusBlur() {
         removeIframe();
     }
 }
@@ -42,6 +42,7 @@ function removeIframe() {
 
     window.removeEventListener('message', lostFocusMessage);
     document.removeEventListener('mousedown', lostFocusClick);
+    document.removeEventListener('visibilitychange', lostFocusBlur);
 }
 
 
@@ -63,5 +64,6 @@ if(iframe instanceof HTMLIFrameElement) {
 
     window.addEventListener('message', lostFocusMessage);
     document.addEventListener('mousedown', lostFocusClick);
+    document.addEventListener('visibilitychange', lostFocusBlur);
     //window.addEventListener('blur', lostFocusBlur);
 }

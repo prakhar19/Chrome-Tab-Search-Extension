@@ -66,6 +66,7 @@ function keyboardEvents(e) {
             if(tab_search_results.contains(activeElement)) {
                 activeElement.click();
             }
+            parent.postMessage('remove-tab-search', '*');
             break;
         case 27:
             if(tab_search_input.value.length < 1) {

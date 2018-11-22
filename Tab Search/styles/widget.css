@@ -8,8 +8,8 @@ body {
     width: 100%;
     margin: 0;
     padding: 12px 20px;
-    background: #ffffff;
-    border: solid 1px #cccccc;
+    background: #fff;
+    border: solid 1px #ccc;
     border-radius: 30px;
     font-size: 20px;
     outline: none;
@@ -20,7 +20,7 @@ body {
     max-height: 240px;
     margin: 0;
     padding: 0;
-    background: #ffffff;
+    background: #fff;
     box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
     list-style: none;
     overflow: hidden auto;
@@ -28,14 +28,15 @@ body {
 
 #tab-search-results>li {
     margin: 0 15px;
-    padding: 5px;
+    padding: 8px 5px;
     text-align: left;
     cursor: pointer;
+    border-bottom: solid 1px #ccc;
     outline: none;
 }
 
 #tab-search-results>li:focus {
-    background: #eeeeee;
+    background: #eee;
 }
 
 .tab-search-result-index {
