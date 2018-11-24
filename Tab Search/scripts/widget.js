@@ -38,6 +38,10 @@ function switchTabs(tabId) {
     chrome.runtime.sendMessage({switchTab: Number(tabId)});
 }
 
+function close() {
+    parent.postMessage('remove-tab-search', '*');
+}
+
 function keyboardEvents(e) {
     var key = event.which || event.keyCode;
 
@@ -61,6 +65,8 @@ function keyboardEvents(e) {
             }
             active_li = active_li.previousSibling;
             break;
+        
+        // Enter key
         case 13:
             activeElement = document.activeElement;
             if(tab_search_input == activeElement) {
@@ -68,15 +74,24 @@ function keyboardEvents(e) {
             } else if(tab_search_results.contains(activeElement)) {
                 activeElement.click();
             }
-            parent.postMessage('remove-tab-search', '*');
+            close();
             break;
+        
+        // Escape key
         case 27:
             if(tab_search_input.value.length < 1) {
-                parent.postMessage('remove-tab-search', '*');
+                close();
             } else {
                 tab_search_input.focus();
                 tab_search_input.value = '';
                 tab_search_input.dispatchEvent(new Event('input'));
+            }
+            break;
+        
+        // Backspace key
+        case 8:
+            if(tab_search_input.value == '') {
+                close();
             }
             break;
         default:
