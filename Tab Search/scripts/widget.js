@@ -92,6 +92,8 @@ function keyboardEvents(e) {
         case 8:
             if(tab_search_input.value == '') {
                 close();
+            } else {
+                active_li = tab_search_input;
             }
             break;
         default:

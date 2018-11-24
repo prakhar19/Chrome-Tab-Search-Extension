@@ -20,10 +20,18 @@ chrome.commands.onCommand.addListener( function(command) {
 chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
     var searchTerm = (request.searchTerm + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
     var switchTab = request.switchTab;
+    
+    if(switchTab !== undefined) {
+        
+        chrome.tabs.get(switchTab, function(tab) {
+            chrome.windows.update(tab.windowId, {focused: true});
+            chrome.tabs.update(Number(switchTab), {active: true});
+        });
 
-    if(searchTerm !== undefined) {
+    } else {
+        
         var matches = [[], [], [], [], [], []], output = [];
-
+        
         if(searchTerm === '') {
             sendResponse({tabs: output});
             return;
@@ -72,13 +80,6 @@ chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
         });
     
         return true;
-    }
-
-    if(switchTab !== undefined) {
-        chrome.tabs.get(switchTab, function(tab) {
-            chrome.windows.update(tab.windowId, {focused: true});
-            chrome.tabs.update(Number(switchTab), {active: true});
-        });
     }
 
 });
