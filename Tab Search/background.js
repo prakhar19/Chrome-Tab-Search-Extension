@@ -18,7 +18,7 @@ chrome.commands.onCommand.addListener( function(command) {
 
 
 chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
-    var searchTerm = request.searchTerm;
+    var searchTerm = (request.searchTerm + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
     var switchTab = request.switchTab;
 
     if(searchTerm !== undefined) {
@@ -58,7 +58,7 @@ chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
                     matches[5].push(tabs[i]);
                     continue;
                 }
-            }console.log(matches);
+            }
     
             for (var i = 0; i < matches.length; i++) {
                 for (var j = 0; j < matches[i].length; j++) {
